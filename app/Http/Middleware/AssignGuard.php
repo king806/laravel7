@@ -14,12 +14,12 @@ class AssignGuard
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null ,$redirectTo )
+    public function handle($request, Closure $next, $guard = null,$redirectTo="/login")
     {
-        if(!Auth::guard($guard)->check()){
+        if (!Auth::guard($guard)->check()) {
             return redirect($redirectTo);
         }
-        Auth::shouldUse();
+        Auth::shouldUse($guard);
         return $next($request);
     }
 }
